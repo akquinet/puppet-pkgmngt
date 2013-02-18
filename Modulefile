@@ -7,4 +7,5 @@ summary 'module to add repositories to and remove repositories from package mana
 project_page 'http://www.akquinet.de/entwicklungsinfrastrukturen.html'
 
 ## Add dependencies, if any:
-dependency 'liquidstate/puppet-wget, '>= 1.0.0'
+dependency 'liquidstate/puppet-wget', '>= 1.0.0'
+dependency 'akquinet/puppet-archmngt', '>= 1.0.0'

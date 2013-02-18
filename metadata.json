@@ -1,19 +1,36 @@
 {
-  "name": "sarah-puppet-repomngt",
-  "author": "sarah",
+  "name": "puppet-repomngt",
+  "author": "saheba",
   "description": "",
-  "license": "",
-  "project_page": "",
-  "source": "",
-  "summary": "",
-  "version": "",
+  "license": "Apache2",
+  "project_page": "http://www.akquinet.de/entwicklungsinfrastrukturen.html",
+  "source": "https://github.com/akquinet/puppet-repomngt",
+  "summary": "module to add repositories to and remove repositories from package managers",
+  "version": "1.0.0",
   "checksums": {
-    "Modulefile": "75e25df5d4a1fd1a4cff7c4df3304c79",
+    "Modulefile": "0d0d0eab236af1fec878d7fa782ff130",
     "README": "8dd6abbacda4bc24951ebcb3a83daf3b",
-    "manifests/init.pp": "cbd2a6b3ffd84ab80640358f5ac4d1e2",
+    "manifests/init.pp": "68b329da9893e34099c7d8ad5cb9c940",
+    "manifests/install.pp": "01c2179c46f72f28278c1e968c3d6de6",
+    "modules/archmngt/Modulefile": "12907b16f542e006a670d14d27566fa3",
+    "modules/archmngt/README": "ce5050e8dba365832165ad865af83b5c",
+    "modules/archmngt/lib/puppet/parser/functions/last_element.rb": "10f38801bca13a52a0b907e775d059b1",
+    "modules/archmngt/manifests/init.pp": "4686473346b6f798888e54b0c0612306",
+    "modules/archmngt/spec/spec.opts": "a600ded995d948e393fbe2320ba8e51c",
+    "modules/archmngt/spec/spec_helper.rb": "ca19ec4f451ebc7fdb035b52eae6e909",
+    "modules/wget/README": "d41d8cd98f00b204e9800998ecf8427e",
+    "modules/wget/manifests/init.pp": "3dc2618163a1f0d717ad910bee416b2a",
     "spec/spec.opts": "a600ded995d948e393fbe2320ba8e51c",
-    "spec/spec_helper.rb": "ca19ec4f451ebc7fdb035b52eae6e909",
-    "tests/init.pp": "0a88e9f5f04f89e7ff4fd2ba24e9a495"
+    "spec/spec_helper.rb": "ca19ec4f451ebc7fdb035b52eae6e909"
   },
-  "dependencies": []
+  "dependencies": [
+    {
+      "name": "liquidstate/puppet-wget",
+      "version_requirement": "\u003e\u003d1.0.0"
+    },
+    {
+      "name": "akquinet/puppet-archmngt",
+      "version_requirement": "\u003e\u003d1.0.0"
+    }
+  ]
 }
