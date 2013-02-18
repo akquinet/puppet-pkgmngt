@@ -1,11 +1,12 @@
-name    'puppet-repomngt'
+name    'puppet-pkgmngt'
 version '1.0.0'
-source 'https://github.com/akquinet/puppet-repomngt'
+source 'https://github.com/akquinet/puppet-pkgmngt'
 author 'saheba'
 license 'Apache2'
-summary 'module to add repositories to and remove repositories from package managers'
+summary 'module to manage packages which are not available in os-specific repositories, but which are available as os-specific packages (deb, rpm, dpkg, etc.)'
 project_page 'http://www.akquinet.de/entwicklungsinfrastrukturen.html'
 
 ## Add dependencies, if any:
 dependency 'liquidstate/puppet-wget', '>= 1.0.0'
+dependency 'puppetlabs/puppetlabs-stdlib', '>= 3.2.0'
 dependency 'akquinet/puppet-archmngt', '>= 1.0.0'
