@@ -10,3 +10,5 @@ project_page 'http://www.akquinet.de/entwicklungsinfrastrukturen.html'
 dependency 'liquidstate/puppet-wget', '>= 1.0.0'
 dependency 'puppetlabs/puppetlabs-stdlib', '>= 3.2.0'
 dependency 'akquinet/puppet-archmngt', '>= 1.0.0'
+## further transitive dependencies of puppet-archmngt
+dependency 'akquinet/puppet-unzip', '>= 1.0.0'

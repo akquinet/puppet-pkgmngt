@@ -10,10 +10,19 @@
 # [*gpgcheck *]
 # perform gpgcheck during installation, default: true
 # 
+#[*exec_pkgmngt_install_prefix*]
+#variable which is used to attach the install exec command as a require attribute to other
+#catalogue definitions
+#
+#[*custom_install_selection*]
+#regexp filtering which files of an archive shall be part of the installation step, default: *
+#
 define pkgmngt::install (
 	$download_url,
 	$gpgcheck = true,
 	$onlyif = undef,
+	$exec_pkgmngt_install_prefix = 'pkgmngt_install_',
+	$custom_install_selection = '*',
 ) {
 	$segments = split($download_url, '[/]')
 	$package_file = last_element($segments)
@@ -22,20 +31,32 @@ define pkgmngt::install (
 	
 	case $file_suffix {
 		'tar','zip','gz': {
+			$target_dir="/tmp/$package_file/"
+			file { "$target_dir":
+				ensure => directory,
+			}
+			$segments_p = split($download_url, '[:]')
+			$segment= $segments_p[0]
+			exec { "echo ":
+				command => "/bin/echo $segment >/tmp/echo.txt",
+				cwd => "/tmp",
+			}
+			
 			archmngt::extract { "pkgmngt_install_fetch_extract_${name}" :
 				archive_file => "$download_url",
-				target_dir => "/tmp/$package_file/",
+				target_dir => "$target_dir",
 				overwrite => true,
-				before => Exec["pkgmngt_install_repo_${name}"],
+				before => Exec["${exec_pkgmngt_install_prefix}${name}"],
+				require => File["$target_dir"]
 			}
-			$install_selection =  "/tmp/$package_file/*"
+			$install_selection =  "/tmp/$package_file/$custom_install_selection"
 		}
 		default : {
 			wget::fetch {
 				"pkgmngt_install_fetch_${name}" :
 					source => "$download_url",
 					destination => "/tmp/$package_file",
-					before => Exec["pkgmngt_install_repo_${name}"],
+					before => Exec["${exec_pkgmngt_install_prefix}${name}"],
 			}	
 			$install_selection = "/tmp/$package_file"
 		}
@@ -49,7 +70,7 @@ define pkgmngt::install (
 				default => ''
 			}
 			exec {
-				"pkgmngt_install_repo_${name}" :
+				"${exec_pkgmngt_install_prefix}${name}" :
 					command => "$pkgmngt -y$param_gpgcheck install $install_selection",
 					cwd => "/tmp",
 					onlyif => $onlyif,
@@ -57,11 +78,11 @@ define pkgmngt::install (
 		}
 		default : {
 			exec {
-				"pkgmngt_install_repo_${name}" :
-					command => "/bin/echo \"operating system $::operatingsystem not yet supported by repomngt\"",
+				"${exec_pkgmngt_install_prefix}${name}" :
+					command => "/bin/echo \"operating system $::operatingsystem not yet supported by pkgmngt\"",
 										
 			}
-			fail("operating system $::operatingsystem not yet supported by repomngt")
+			fail("operating system $::operatingsystem not yet supported by pkgmngt")
 		}
 	}
 }

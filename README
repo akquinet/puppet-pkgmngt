@@ -1,3 +1,7 @@
-puppet-repomngt
+puppet-pkgmngt
 
-This is the puppet-repomngt module.
+This is the puppet-pkgmngt module.
+
+If you want to install (several packages) from a zip archive you must include
+https://github.com/akquinet/puppet-unzip.git and place an
+"include unzip" or "class { "unzip" : }" in your recipe.  
