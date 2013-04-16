@@ -20,6 +20,7 @@
 define pkgmngt::install (
 	$download_url,
 	$gpgcheck = true,
+	$nocheckcertificate_if_https = false,
 	$onlyif = undef,
 	$exec_pkgmngt_install_prefix = 'pkgmngt_install_',
 	$custom_install_selection = '*',
@@ -46,6 +47,7 @@ define pkgmngt::install (
 				archive_file => "$download_url",
 				target_dir => "$target_dir",
 				overwrite => true,
+				nocheckcertificate_if_https => $nocheckcertificate_if_https,
 				before => Exec["${exec_pkgmngt_install_prefix}${name}"],
 				require => File["$target_dir"]
 			}
@@ -56,6 +58,8 @@ define pkgmngt::install (
 				"pkgmngt_install_fetch_${name}" :
 					source => "$download_url",
 					destination => "/tmp/$package_file",
+					redownload => true,
+					nocheckcertificate => $nocheckcertificate_if_https,
 					before => Exec["${exec_pkgmngt_install_prefix}${name}"],
 			}	
 			$install_selection = "/tmp/$package_file"
