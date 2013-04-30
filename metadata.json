@@ -12,7 +12,7 @@
     "Modulefile": "45b3863caf886178dbc02e6c38f5bde1",
     "README": "6ed693fa2b2f8838bcfcc315e2db8bab",
     "manifests/init.pp": "68b329da9893e34099c7d8ad5cb9c940",
-    "manifests/install.pp": "5f89ac57e784b6e0b5b1db0d817ae009",
+    "manifests/install.pp": "b7491ed419b9bc21020d8c92dcad3182",
     "modules/archmngt/Modulefile": "39fc9e63e2fbf9b63a2f0631ef7c75d4",
     "modules/archmngt/README": "9d9e688323c0c5e988fcf0ad0b5326f0",
     "modules/archmngt/lib/puppet/parser/functions/last_element.rb": "10f38801bca13a52a0b907e775d059b1",

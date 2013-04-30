@@ -32,7 +32,7 @@ define pkgmngt::install (
 	
 	case $file_suffix {
 		'tar','zip','gz': {
-			$target_dir="/tmp/$package_file/"
+			$target_dir="/tmp/acr_$package_file"
 			file { "$target_dir":
 				ensure => directory,
 			}
@@ -51,7 +51,7 @@ define pkgmngt::install (
 				before => Exec["${exec_pkgmngt_install_prefix}${name}"],
 				require => File["$target_dir"]
 			}
-			$install_selection =  "/tmp/$package_file/$custom_install_selection"
+			$install_selection =  "$target_dir/$custom_install_selection"
 		}
 		default : {
 			wget::fetch {
